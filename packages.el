@@ -8,3 +8,4 @@
 
 (package! direnv)
 (package! just-mode)
+(package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))

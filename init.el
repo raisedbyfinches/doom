@@ -55,7 +55,7 @@
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
        unicode             ; extended unicode support for various languages
-       (vc-gutter +pretty) ; vcs diff in the fringe
+       (vc-gutter +pretty) ; vcs diff in the fringe [CUSTOM]
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
        workspaces          ; tab emulation, persistence & separate workspaces
@@ -145,7 +145,6 @@
        emacs-lisp          ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        (ess
-        +stan
         +tree-sitter)      ; emacs speaks statistics
        ;;factor
        ;;faust             ; dsp, but you get to keep your soul
@@ -180,6 +179,7 @@
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
        (markdown           ; writing docs for people to ignore
+        +tree-sitter
         +grip)
        ;;nim               ; python + lisp at the speed of c
        (nix

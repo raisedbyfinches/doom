@@ -36,6 +36,28 @@
       ;; I want the cmake flags to use system vterm whenever it recompiles
       vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
+(custom-set-faces!
+  ;; base
+  `(font-lock-comment-face :inherit 'font-lock-comment-face :weight bold)
+  `(font-lock-doc-face :foreground ,(doom-color 'comments) :inherit 'bold-italic)
+  `((line-number-current-line &override) :foreground ,(doom-color 'base4) :inherit 'bold)
+  `(whitespace-space :foreground ,(doom-lighten (doom-color 'bg-alt) 0.05))
+  `(whitespace-newline :foreground ,(doom-color 'bg))
+
+  ;; doom
+  `(doom-dashboard-footer-icon :foreground ,(doom-color 'red))
+  `(doom-dashboard-menu-desc   :foreground ,(doom-color 'yellow))
+  `(doom-dashboard-menu-title  :foreground ,(doom-color 'red))
+  `(doom-dashboard-loaded      :inherit font-lock-comment-face)
+
+  ;; other appearance
+  `(solaire-mode-line-inactive-face :background ,(doom-color 'bg) :foreground ,(doom-color 'bg-alt))
+  `(doom-modeline-icon-inactive :background ,(doom-color 'bg-alt) :foreground ,(doom-color 'bg-alt))
+  `(ivy-posframe :background ,(doom-darken (doom-color 'bg) 0.1))
+  `(company-box-background :background ,(doom-darken (doom-color 'bg) 0.1))
+  `(ein:cell-input-area :background ,(doom-color 'bg-alt) )
+  )
+
 ;; add extra padding to the modeline to prevent it overflowing
 (after! doom-modeline
   (doom-modeline-def-modeline 'main
@@ -47,8 +69,7 @@
 (setq-default
  delete-by-moving-to-trash  t
  uniquify-buffer-name-style 'forward
- window-combination-resize  t
- )
+ window-combination-resize  t)
 
 (setq evil-want-fine-undo t
       truncate-string-ellipsis "…"
@@ -107,7 +128,7 @@
 (after! spell-fu
   (setq ispell-current-dictionary "en_GB"))
 
-;; -- r (ESS)--------------------------------------------------------------------
+;; -- r (ESS) -------------------------------------------------------------------
 (after! ess
   (set-popup-rules! '(("^\\*R:*\\*$" :side right :size 0.5 :ttl nil)))
   (map! :desc "Switch between buffers and repl"
@@ -131,11 +152,25 @@
   (map! (:map (ess-mode-map inferior-ess-mode-map) :g ";" #'ess-insert-assign))
   )
 
+;; -- typst ---------------------------------------------------------------------
+(use-package! typst-ts-mode
+  :mode "\\.typ'"
+  :custom
+  (typst-ts-watch-options "--open")
+  (typst-ts-mode-grammar-location
+   (expand-file-name "tree-sitter/libtree-sitter-typst.so" user-emacs-directory))
+  (typst-ts-mode-enable-raw-blocks-highlight t)
+  :config
+  (keymap-set typst-ts-mode-map "C-c C-c" #'typst-ts-tmenu))
 
-;; -- DOOM ----------------------------------------------------------------------
+(add-to-list 'auto-mode-alist '("*\\.typ\\'" . typst-ts-mode))
+
+;; DOOM -------------------------------------------------------------------------
 (defun doom/diff-init ()
   "ediff the current `init.el' with the example in doom-emacs-dir"
   (interactive)
   (ediff-files (concat doom-user-dir "init.el")
                (concat doom-emacs-dir "static/init.example.el")))
 
+;; this will need to go elsewhere, but here just for now.
+;; add keymap for +eval/repl here
