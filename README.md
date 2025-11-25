@@ -10,12 +10,12 @@ Personal overlay for [doom-emacs](https://github.com/hlissner/doom-emacs).
 ## Usage
 
 ``` sh
-git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-git clone https://gitlab.com/karetsu/doom-overlay ~/.config/doom
+git clone https://github.com/hlissner/doom-emacs ~/.config/emacs
+git clone https://gitlab.com/raisedbyfinches/doom ~/.config/doom
 ```
 
 Edit `~/.config/doom/init.el` to your personal preference and then
 
 ```sh
-cd ~/.emacs.d && make
+~/.config/emacs/bin/doom install
 ```
